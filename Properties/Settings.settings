@@ -5,6 +5,12 @@
     <Setting Name="ComPort" Type="System.String" Scope="User">
       <Value Profile="(Default)">COM1</Value>
     </Setting>
+    <Setting Name="BaudRate" Type="System.String" Scope="User">
+      <Value Profile="(Default)">9600</Value>
+    </Setting>
+    <Setting Name="UseTLS" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
     <Setting Name="HexString1" Type="System.String" Scope="User">
       <Value Profile="(Default)">48 65 6C 6C 6F 20 57 6F 72 6C 64 0A 0D</Value>
     </Setting>
@@ -20,8 +26,8 @@
     <Setting Name="HexString5" Type="System.String" Scope="User">
       <Value Profile="(Default)" />
     </Setting>
-    <Setting Name="useTLS" Type="System.Boolean" Scope="User">
-      <Value Profile="(Default)">False</Value>
+    <Setting Name="HexString6" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
     </Setting>
   </Settings>
 </SettingsFile>

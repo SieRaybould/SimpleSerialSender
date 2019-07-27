@@ -37,6 +37,30 @@ namespace SimpleSerialSender.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("9600")]
+        public string BaudRate {
+            get {
+                return ((string)(this["BaudRate"]));
+            }
+            set {
+                this["BaudRate"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool UseTLS {
+            get {
+                return ((bool)(this["UseTLS"]));
+            }
+            set {
+                this["UseTLS"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("48 65 6C 6C 6F 20 57 6F 72 6C 64 0A 0D")]
         public string HexString1 {
             get {
@@ -97,13 +121,13 @@ namespace SimpleSerialSender.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("False")]
-        public bool useTLS {
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string HexString6 {
             get {
-                return ((bool)(this["useTLS"]));
+                return ((string)(this["HexString6"]));
             }
             set {
-                this["useTLS"] = value;
+                this["HexString6"] = value;
             }
         }
     }

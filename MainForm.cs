@@ -81,6 +81,7 @@ namespace SimpleSerialSender
     void updateGuiControlsForOpenComPort()
     {
       textBox_comPort.Enabled = false;
+      textBox_baudRate.Enabled = false;
       checkBox_useTLS.Enabled = false;
       button_openClose.Text = "Close Com Port";
       textBox_hexToSend1.Enabled = true;
@@ -93,11 +94,14 @@ namespace SimpleSerialSender
       button_send4.Enabled = true;
       textBox_hexToSend5.Enabled = true;
       button_send5.Enabled = true;
+      textBox_hexToSend6.Enabled = true;
+      button_send6.Enabled = true;
     }
 
     void updateGuiControlsForClosedComPort()
     {
       textBox_comPort.Enabled = true;
+      textBox_baudRate.Enabled = true;
       checkBox_useTLS.Enabled = true;
       button_openClose.Text = "Open Com Port";
       textBox_hexToSend1.Enabled = false;
@@ -110,6 +114,8 @@ namespace SimpleSerialSender
       button_send4.Enabled = false;
       textBox_hexToSend5.Enabled = false;
       button_send5.Enabled = false;
+      textBox_hexToSend6.Enabled = false;
+      button_send6.Enabled = false;
     }
 
     Stream m_commsStream = null;
@@ -119,9 +125,12 @@ namespace SimpleSerialSender
     {
       lock (myLock) {
         bool isOpened = false;
-
         serialPort1.PortName = textBox_comPort.Text;
-        serialPort1.BaudRate = 19200;
+        int baudRate;
+        if (int.TryParse(textBox_baudRate.Text, out baudRate))
+        {
+          serialPort1.BaudRate = baudRate;
+        }
         serialPort1.Parity = System.IO.Ports.Parity.None;
         serialPort1.StopBits = System.IO.Ports.StopBits.One;
         serialPort1.DataBits = 8;
@@ -266,26 +275,35 @@ namespace SimpleSerialSender
       sendHex(textBox_hexToSend5.Text);
     }
 
+    private void Button_send6_Click(object sender, EventArgs e)
+    {
+      sendHex(textBox_hexToSend6.Text);
+    }
+
     private void MainForm_Load(object sender, EventArgs e)
     {
       textBox_comPort.Text = SimpleSerialSender.Properties.Settings.Default.ComPort;
-      checkBox_useTLS.Checked = SimpleSerialSender.Properties.Settings.Default.useTLS;
+      textBox_baudRate.Text = SimpleSerialSender.Properties.Settings.Default.BaudRate;
+      checkBox_useTLS.Checked = SimpleSerialSender.Properties.Settings.Default.UseTLS;
       textBox_hexToSend1.Text = SimpleSerialSender.Properties.Settings.Default.HexString1;
       textBox_hexToSend2.Text = SimpleSerialSender.Properties.Settings.Default.HexString2;
       textBox_hexToSend3.Text = SimpleSerialSender.Properties.Settings.Default.HexString3;
       textBox_hexToSend4.Text = SimpleSerialSender.Properties.Settings.Default.HexString4;
       textBox_hexToSend5.Text = SimpleSerialSender.Properties.Settings.Default.HexString5;
+      textBox_hexToSend6.Text = SimpleSerialSender.Properties.Settings.Default.HexString6;
     }
 
     private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
     {
       SimpleSerialSender.Properties.Settings.Default.ComPort = textBox_comPort.Text;
-      SimpleSerialSender.Properties.Settings.Default.useTLS = checkBox_useTLS.Checked;
+      SimpleSerialSender.Properties.Settings.Default.BaudRate = textBox_baudRate.Text;
+      SimpleSerialSender.Properties.Settings.Default.UseTLS = checkBox_useTLS.Checked;
       SimpleSerialSender.Properties.Settings.Default.HexString1 = textBox_hexToSend1.Text;
       SimpleSerialSender.Properties.Settings.Default.HexString2 = textBox_hexToSend2.Text;
       SimpleSerialSender.Properties.Settings.Default.HexString3 = textBox_hexToSend3.Text;
       SimpleSerialSender.Properties.Settings.Default.HexString4 = textBox_hexToSend4.Text;
       SimpleSerialSender.Properties.Settings.Default.HexString5 = textBox_hexToSend5.Text;
+      SimpleSerialSender.Properties.Settings.Default.HexString6 = textBox_hexToSend6.Text;
       SimpleSerialSender.Properties.Settings.Default.Save();
 
       closeComPort();
